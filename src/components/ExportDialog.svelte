@@ -106,7 +106,6 @@
       </div>
 
       {#if targetId === 'limesurvey'}
-        <div class="limesurvey-row">
         <fieldset>
           <legend>{t.limesurveyFormat}</legend>
           {#each limesurveyFormats as format (format.value)}
@@ -129,20 +128,18 @@
             </label>
           {/each}
         </fieldset>
+      {/if}
 
-        <fieldset>
-          <legend>{t.limesurveyStructure}</legend>
+      <details class="advanced">
+        <summary>{t.advancedOptions}</summary>
+        <p class="hint">{t.advancedOptionsHint}</p>
+        {#if targetId === 'limesurvey'}
           <label class="check">
             <input type="checkbox" bind:checked={app.exportOptions.limesurveyGroupHeadings} />
             {t.optionGroupHeadings}
           </label>
-          <p class="hint">{t.optionGroupHeadingsHint}</p>
-        </fieldset>
-        </div>
-      {/if}
-
-      <fieldset>
-        <legend>{t.exportOptions}</legend>
+          <p class="hint indented">{t.optionGroupHeadingsHint}</p>
+        {/if}
         <div class="option-grid">
           <label class="check">
             <input type="checkbox" bind:checked={app.exportOptions.keepCoreMarker} />
@@ -174,7 +171,7 @@
           {/if}
         </div>
         <p class="hint">{t.exportAllLanguages.replace('{languages}', (app.model?.languages ?? []).join(', '))}</p>
-      </fieldset>
+      </details>
 
       {#if !bundle}
         <p class="empty">{t.nothingSelected}</p>
@@ -300,15 +297,22 @@
     padding: 0.4rem 0.7rem 0.5rem;
     margin: 0 0 0.6rem;
   }
-  /* The three LimeSurvey fieldsets sit side by side instead of stacking. */
-  .limesurvey-row {
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1fr);
-    gap: 0.6rem;
-    margin-bottom: 0.6rem;
+  details.advanced {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.4rem 0.7rem;
+    margin: 0 0 0.6rem;
   }
-  .limesurvey-row fieldset {
-    margin: 0;
+  details.advanced summary {
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--dzif-navy);
+  }
+  details.advanced[open] summary {
+    margin-bottom: 0.3rem;
+  }
+  .indented {
+    padding-left: 1.4rem;
   }
   legend {
     font-weight: 700;
@@ -529,9 +533,6 @@
   @media (max-width: 60rem) {
     .cards {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    .limesurvey-row {
-      grid-template-columns: 1fr;
     }
   }
   @media (max-width: 34rem) {

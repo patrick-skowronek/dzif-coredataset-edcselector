@@ -12,6 +12,7 @@
   const MDM_URL = 'https://mdm.mi.uni-heidelberg.de/46192?form-id=5';
   const TIBBD_URL = 'https://www.dzif.de/de/infrastruktur/bioressourcen-biodaten-und-digitale-gesundheit#2';
   const DZIF_URL = 'https://www.dzif.de/de';
+  const GITHUB_URL = 'https://github.com/patrick-skowronek/dzif-coredataset-edcselector';
 
   const app = new AppState();
   app.restore();
@@ -134,6 +135,9 @@
       <a href={TIBBD_URL} title={t.linkTibbdTitle} target="_blank" rel="noopener noreferrer">
         {t.linkTibbd}
       </a>
+      <a href={GITHUB_URL} title={t.linkGithubTitle} target="_blank" rel="noopener noreferrer">
+        {t.linkGithub}
+      </a>
     </nav>
   </div>
 </header>
@@ -231,7 +235,14 @@
     <p class="license">
       © 2026 {t.logoAlt} · {t.licenseLine}
     </p>
-    <p>Webapp Version: 0.1</p>
+    <p class="app-version">
+      {t.appVersion}
+      <a href={`${GITHUB_URL}/releases`} target="_blank" rel="noopener noreferrer">
+        {__APP_VERSION__}
+      </a>
+      ·
+      <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">{t.linkGithub}</a>
+    </p>
   </footer>
 {/if}
 
@@ -390,6 +401,11 @@
     margin: 0.9rem 0 0.6rem;
     padding-top: 0.9rem;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .app-version {
+    margin: 0.5rem 0 0;
+    color: #9fc7e6;
+    font-size: 0.8rem;
   }
   .license {
     margin: 0;

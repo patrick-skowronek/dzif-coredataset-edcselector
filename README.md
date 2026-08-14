@@ -8,6 +8,8 @@ system, or a plain codebook.
 A static web app: HTML, CSS, one JS file and the ODM files. No server and no upload —
 the dataset ships with the app and everything happens in your browser.
 
+Source and releases: <https://github.com/patrick-skowronek/dzif-coredataset-edcselector>
+
 ## Test it
 
 ```bash
@@ -73,6 +75,13 @@ npm run check     # svelte-check + TypeScript
 npm run build     # static bundle in dist/
 npm run preview   # serve the built bundle
 ```
+
+### The portable package
+
+Each release carries `dzif-coredataset-edcselector-<version>.zip`: `index.html`, one
+`app.js`, one `app.css`, the DZIF logos and the `odm/` folder — plus README, LICENSE
+and NOTICE. It is built with relative asset paths, so unzip it anywhere and serve the
+folder from any web server.
 
 
 ## Ideas for later

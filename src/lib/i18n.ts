@@ -62,6 +62,8 @@ export interface Strings {
 
   exportTitle: string;
   exportOptions: string;
+  advancedOptions: string;
+  advancedOptionsHint: string;
   optionKeepMarker: string;
   optionHints: string;
   optionSkipLogic: string;
@@ -138,6 +140,9 @@ export interface Strings {
   linkTibbd: string;
   linkTibbdTitle: string;
   linkDzif: string;
+  linkGithub: string;
+  linkGithubTitle: string;
+  appVersion: string;
   logoAlt: string;
   about: string;
   aboutText: string;
@@ -214,6 +219,9 @@ const de: Strings = {
 
   exportTitle: 'Export',
   exportOptions: 'Optionen',
+  advancedOptions: 'Erweiterte Optionen',
+  advancedOptionsHint:
+    'Die Voreinstellungen passen für die meisten Studien — hier können Sie den Export im Detail anpassen.',
   optionKeepMarker: 'Markierung * in den Fragetexten behalten',
   optionHints: 'Hinweistexte als Feldnotiz übernehmen',
   optionSkipLogic: 'Sprunglogik übersetzen',
@@ -300,6 +308,9 @@ const de: Strings = {
   linkTibbd: 'TI BBD',
   linkTibbdTitle: 'TI Bioressourcen, Biodaten und digitale Gesundheit (TI BBD) im DZIF',
   linkDzif: 'dzif.de',
+  linkGithub: 'GitHub',
+  linkGithubTitle: 'Quellcode, Releases und Fehlermeldungen auf GitHub',
+  appVersion: 'App-Version',
   logoAlt: 'Deutsches Zentrum für Infektionsforschung',
   about: 'Über',
   aboutText:
@@ -378,6 +389,9 @@ const en: Strings = {
 
   exportTitle: 'Export',
   exportOptions: 'Options',
+  advancedOptions: 'Advanced options',
+  advancedOptionsHint:
+    'The defaults suit most studies — here you can fine-tune what the export contains.',
   optionKeepMarker: 'Keep the * marker in question texts',
   optionHints: 'Carry hints over as field notes',
   optionSkipLogic: 'Translate skip logic',
@@ -463,6 +477,9 @@ const en: Strings = {
   linkTibbd: 'TI BBD',
   linkTibbdTitle: 'Bioresources, Biodata and Digital Health (TI BBD) at DZIF',
   linkDzif: 'dzif.de',
+  linkGithub: 'GitHub',
+  linkGithubTitle: 'Source code, releases and issue tracker on GitHub',
+  appVersion: 'App version',
   logoAlt: 'German Center for Infection Research',
   about: 'About',
   aboutText:
