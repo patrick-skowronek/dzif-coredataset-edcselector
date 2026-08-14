@@ -1,6 +1,6 @@
 {
   "name": "dzif-coredataset-edcselector",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "DZIF Core Dataset EDC Selector: pick questions from the DZIF core dataset (CDISC ODM) and export them for REDCap, LimeSurvey and other EDC systems.",
   "private": true,
   "license": "Apache-2.0",
