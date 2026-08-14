@@ -1,0 +1,16 @@
+{
+  "versions": [
+    {
+      "id": "46192",
+      "file": "46192_DZIF-Kerndatensatz.xml",
+      "created": "2025-07-29",
+      "mdmUrl": "https://mdm.mi.uni-heidelberg.de/46192?form-id=5"
+    },
+    {
+      "id": "46190",
+      "file": "46190_DZIF-Kerndatensatz.xml",
+      "created": "2025-05-16",
+      "mdmUrl": "https://mdm.mi.uni-heidelberg.de/46190?form-id=5"
+    }
+  ]
+}

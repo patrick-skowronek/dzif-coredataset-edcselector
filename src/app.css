@@ -1,0 +1,184 @@
+/**
+ * Light theme in the DZIF house style.
+ *
+ * Colours taken from dzif.de: deep navy #001E50 for headings and structure,
+ * cyan #0395D3 for links and interactive elements, #F5F5F5 for section tints.
+ * dzif.de sets its body type in "Apercu Pro", a licensed font we cannot ship, so
+ * it is named first and a close system stack follows.
+ */
+:root {
+  --dzif-navy: #001e50;
+  --dzif-navy-700: #0a2c63;
+  --dzif-cyan: #0395d3;
+  --dzif-cyan-dark: #0277a9;
+
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f5f5f5;
+  --surface-3: #e5e5e6;
+  --border: #d5d8dd;
+  --border-strong: #b3b9c4;
+  --text: #101720;
+  --text-muted: #5b6675;
+
+  --accent: var(--dzif-cyan);
+  --accent-dark: var(--dzif-cyan-dark);
+  --accent-text: #ffffff;
+  --accent-soft: #e6f4fb;
+
+  --core: #8a5200;
+  --core-soft: #fdf3e3;
+  --warn: #a4400c;
+  --warn-soft: #fdeee6;
+  --ok: #1c6b3c;
+  --ok-soft: #e7f4ec;
+
+  --radius: 3px;
+  --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  --sans:
+    'Apercu Pro', system-ui, -apple-system, 'Helvetica Neue', 'Segoe UI', Roboto, sans-serif;
+  --shadow: 0 1px 2px rgba(0, 30, 80, 0.08);
+  --shadow-lg: 0 10px 40px rgba(0, 30, 80, 0.18);
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--dzif-navy);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: var(--accent-dark);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+
+a:hover {
+  color: var(--dzif-navy);
+}
+
+button,
+select,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  padding: 0.3rem 0.7rem;
+  color: var(--dzif-navy);
+  transition:
+    border-color 0.12s ease,
+    background 0.12s ease;
+}
+
+button:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+button.primary {
+  background: var(--dzif-navy);
+  border-color: var(--dzif-navy);
+  color: #fff;
+  font-weight: 700;
+}
+
+button.primary:hover:not(:disabled) {
+  background: var(--dzif-navy-700);
+  border-color: var(--dzif-navy-700);
+  color: #fff;
+}
+
+button.cyan {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+  font-weight: 700;
+}
+
+button.cyan:hover:not(:disabled) {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+  color: var(--accent-text);
+}
+
+input[type='search'],
+input[type='text'],
+input[type='number'],
+select {
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  padding: 0.3rem 0.5rem;
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+  accent-color: var(--accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--dzif-cyan);
+  outline-offset: 1px;
+}
+
+code,
+.mono {
+  font-family: var(--mono);
+  font-size: 0.86em;
+}
+
+dialog {
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+
+dialog::backdrop {
+  background: rgba(0, 30, 80, 0.45);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

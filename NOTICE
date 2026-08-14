@@ -1,0 +1,49 @@
+DZIF Core Dataset EDC Selector
+Copyright 2026 Deutsches Zentrum für Infektionsforschung (DZIF)
+
+Author: Patrick Skowronek
+
+This product includes software developed at the German Center for Infection
+Research (DZIF). Licensed under the Apache License, Version 2.0; see LICENSE.
+
+The copyright line names the institution holding the economic rights in the
+software (§ 69b UrhG). Authorship itself stays with the author named above
+(§ 7, § 13 UrhG) and is not transferable.
+
+--------------------------------------------------------------------------------
+Third-party software
+--------------------------------------------------------------------------------
+
+The built application (dist/app.js) contains compiled output of:
+
+  Svelte — https://svelte.dev
+  Copyright (c) 2016-present, Svelte contributors
+  Licensed under the MIT License.
+
+All other dependencies (Vite, Vitest, TypeScript, svelte-check, jsdom and their
+transitive dependencies) are build-time tools only. They are not redistributed
+with this repository and no part of them ends up in the built application. Their
+licences are MIT, Apache-2.0, ISC, MIT-0, BSD-2-Clause, BSD-3-Clause, MPL-2.0,
+BlueOak-1.0.0 and CC0-1.0; see node_modules after `npm install` for the full text
+of each.
+
+--------------------------------------------------------------------------------
+Content that is NOT covered by the Apache License
+--------------------------------------------------------------------------------
+
+1. The DZIF core dataset itself
+   public/odm/dzif-kerndatensatz.xml
+
+   The metadata of the DZIF core dataset (DZIF-Kerndatensatz) is content owned by
+   DZIF, not part of this software. It is bundled for convenience. The
+   authoritative version is published in the Medical Data Models portal:
+   https://mdm.mi.uni-heidelberg.de/46192?form-id=5
+   Files exported by this tool derive from that metadata.
+
+2. The DZIF logo and name
+   public/dzif-logo.svg, public/dzif-logo-en.svg
+
+   "DZIF", the DZIF logo and the DZIF visual identity are trademarks of the
+   German Center for Infection Research. Section 6 of the Apache License does not
+   grant permission to use them. They are included here for use within DZIF and
+   must be removed or replaced in derivative works published outside DZIF.
