@@ -1,14 +1,12 @@
 name: Release
 
-# Runs only when a release is published (plus a manual button for dry runs), so a
-# free account spends a couple of Actions minutes per release instead of per push.
 on:
   release:
     types: [published]
   workflow_dispatch:
 
 permissions:
-  contents: write # attach the package to the release
+  contents: write 
   pages: write
   id-token: write
 
@@ -17,14 +15,14 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
+  package:
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.version.outputs.version }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
@@ -51,8 +49,6 @@ jobs:
       - run: npm test
       - run: npm run check
 
-      # The downloadable package uses relative asset paths, so it works from any
-      # folder on any web server. The Pages build needs the /<repository>/ prefix.
       - name: Build the portable package
         run: BASE_PATH=./ npm run build
 
@@ -75,21 +71,58 @@ jobs:
         run: gh release upload "$TAG" "dzif-coredataset-edcselector-$VERSION.zip" --clobber
 
       - name: Build for GitHub Pages
+        if: vars.DEPLOY_PAGES == 'true'
         run: BASE_PATH="/${GITHUB_REPOSITORY#*/}/" npm run build
 
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/configure-pages@v6
+        if: vars.DEPLOY_PAGES == 'true'
+
+      - uses: actions/upload-pages-artifact@v5
+        if: vars.DEPLOY_PAGES == 'true'
         with:
           path: dist
-          # Artifacts share a storage quota with Packages, so keep them briefly.
           retention-days: 1
 
   deploy:
-    needs: build
+    needs: package
+    if: vars.DEPLOY_PAGES == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
+
+  image:
+    needs: package 
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - id: meta
+        uses: docker/metadata-action@v6
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=raw,value=latest,enable=${{ github.event_name == 'release' }}
+            type=raw,value=dev,enable=${{ github.event_name == 'workflow_dispatch' }}
+
+
+      - uses: docker/build-push-action@v7
+        with:
+          context: .
+          push: ${{ github.event_name == 'release' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}

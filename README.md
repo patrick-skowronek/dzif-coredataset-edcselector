@@ -83,7 +83,6 @@ Each release carries `dzif-coredataset-edcselector-<version>.zip`: `index.html`,
 and NOTICE. It is built with relative asset paths, so unzip it anywhere and serve the
 folder from any web server.
 
-
 ## Ideas for later
 
 Nothing here is promised; it depends on whether the tool proves useful.

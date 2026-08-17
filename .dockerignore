@@ -1,0 +1,8 @@
+node_modules
+dist
+.git
+.github
+.claude
+.vite
+*.local
+.DS_Store
