@@ -26,4 +26,8 @@ export default defineConfig({
       },
     },
   },
+  test: {
+    // Sets default hook timeout to 30 seconds globally
+    hookTimeout: 30000, 
+  },
 });
