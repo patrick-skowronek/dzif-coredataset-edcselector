@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { parseOdmString } from './parse';
+import type { OdmModel } from './types';
 import { findVersion, newestVersion, parseVersionManifest } from './versions';
 
 const ODM_DIR = resolve(import.meta.dirname, '../../../public/odm');
@@ -10,6 +11,19 @@ function manifest() {
   return parseVersionManifest(
     JSON.parse(readFileSync(resolve(ODM_DIR, 'versions.json'), 'utf8')) as unknown,
   );
+}
+
+/**
+ * Parsing a shipped ODM file takes several seconds, so each one is parsed at most
+ * once per test file.
+ */
+const parsed = new Map<string, OdmModel>();
+function load(file: string): OdmModel {
+  const cached = parsed.get(file);
+  if (cached) return cached;
+  const model = parseOdmString(readFileSync(resolve(ODM_DIR, file), 'utf8'));
+  parsed.set(file, model);
+  return model;
 }
 
 describe('the shipped version manifest', () => {
@@ -21,8 +35,7 @@ describe('the shipped version manifest', () => {
 
   it('points every entry at a readable ODM file whose date matches', () => {
     for (const version of manifest()) {
-      const xml = readFileSync(resolve(ODM_DIR, version.file), 'utf8');
-      const model = parseOdmString(xml);
+      const model = load(version.file);
       expect(model.creationDateTime?.slice(0, 10), version.file).toBe(version.created);
       expect(model.studyName, version.file).toContain(version.id);
       expect(model.itemNodeIds.length, version.file).toBeGreaterThan(0);
@@ -69,9 +82,7 @@ describe('manifest validation', () => {
 });
 
 describe('the older version 46190', () => {
-  const model = parseOdmString(
-    readFileSync(resolve(ODM_DIR, '46190_DZIF-Kerndatensatz.xml'), 'utf8'),
-  );
+  const model = load('46190_DZIF-Kerndatensatz.xml');
 
   it('parses with its own counts', () => {
     expect(model.studyName).toBe('46190_DZIF-Kerndatensatz');
